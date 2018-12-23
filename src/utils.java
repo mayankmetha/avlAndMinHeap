@@ -1,5 +1,6 @@
 import java.io.*;
 import java.util.Random;
+import java.util.Scanner;
 
 public class utils {
 
@@ -23,5 +24,13 @@ public class utils {
         } catch (IOException e) {
             return ("Creating file in "+filePath+" failed");
         }
+    }
+
+    int keyboardInput() {
+        System.out.print("Input a key: ");
+        Scanner s = new Scanner(System.in);
+        if(s.hasNextInt())
+            return s.nextInt();
+        else return Integer.MIN_VALUE;
     }
 }
