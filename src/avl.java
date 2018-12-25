@@ -39,15 +39,30 @@ public class avl {
             // Duplicate node not allowed
         }
         t.height = Math.max(height(t.left),height(t.right))+1;
-        return t;
+        return balance(t);
     }
 
-    avlNode delete(int key, avlNode t) {
-        //TODO: complete this
-        return null;
+    void delete(int key) {
+        root = delete(key,root);
     }
 
-    void findKey(int key) {
+    private avlNode delete(int key, avlNode t) {
+        if (t == null) {
+            return null;
+        } else if (key < t.key) {
+            t.left = delete(key, t.left);
+        } else if (key > t.key) {
+            t.right = delete(key, t.right);
+        } else if (t.left != null && t.right != null) {
+            t.key = findMin(t.right).key;
+            t.right = delete(t.key,t.right);
+        } else {
+            t = (t.left != null)?t.left:t.right;
+        }
+        return balance(t);
+    }
+
+    void find(int key) {
         flag = false;
         if(find(key,root)) {
            System.out.println(key+" found");
@@ -98,6 +113,33 @@ public class avl {
             postorder(t.right);
             System.out.print(t.key+" ");
         }
+    }
+
+    private avlNode findMin(avlNode t) {
+        if(t.left==null)
+            return t;
+        else
+            return findMin(t.left);
+    }
+
+    private avlNode balance(avlNode t) {
+        if(t == null)
+            return t;
+        if(height(t.left)-height(t.right) >= 2) {
+            if(height(t.left.left)>=height(t.left.right)) {
+                t = LL(t);
+            } else {
+                t = LR(t);
+            }
+        } else if(height(t.right)-height(t.left) >= 2) {
+            if(height(t.right.right)>=height(t.right.left)) {
+                t = RR(t);
+            } else {
+                t = RL(t);
+            }
+        }
+        t.height = Math.max(height(t.left),height(t.right)) + 1;
+        return t;
     }
 
     private avlNode RR(avlNode key1) {
