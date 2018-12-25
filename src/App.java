@@ -1,6 +1,3 @@
-package com.company;
-import com.company.minHeap;
-
 import java.util.Scanner;
 
 import static java.lang.Integer.MAX_VALUE;

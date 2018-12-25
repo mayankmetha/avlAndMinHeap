@@ -1,6 +1,3 @@
-package com.company;
-import com.company.App;
-
 import static java.lang.Integer.MAX_VALUE;
 import static java.lang.Integer.MIN_VALUE;
 
