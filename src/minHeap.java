@@ -17,6 +17,17 @@ public class minHeap {
         heapifyUp(heap.size()-1);
     }
 
+    void delete(int key,Boolean status) {
+        if(heap.contains(key)) {
+            swap(heap.indexOf(key),heap.size()-1);
+            heap.remove(heap.size()-1);
+            heapifyDown(0);
+            if(status) System.out.println(key+" deleted");
+        } else {
+            if(status) System.out.println(key+" not found");
+        }
+    }
+
     void deleteMin() {
         swap(0,heap.size()-1);
         heap.remove(heap.size()-1);

@@ -153,8 +153,8 @@ public class App {
         System.out.println("2. Destroy");
         System.out.println("3. Insert key");
         System.out.println("4. Insert keys from file");
-        //System.out.println("5. Delete key");
-        //System.out.println("6. Delete keys from file");
+        System.out.println("5. Delete key");
+        System.out.println("6. Delete keys from file");
         System.out.println("7. Delete min");
         System.out.println("8. Find key");
         System.out.println("9. Find min");
@@ -199,6 +199,26 @@ public class App {
                 stop = System.nanoTime();
                 displayTime(start,stop);
                 break;
+            case 5:
+                System.out.print("Input a name: ");
+                tmp = br.readLine();
+                System.out.print("Input a key: ");
+                x = Integer.parseInt(br.readLine());
+                start = System.nanoTime();
+                ds.heapDeleteKey(tmp,x);
+                stop = System.nanoTime();
+                displayTime(start,stop);
+                break;
+            case 6:
+                System.out.print("Input a name: ");
+                tmp = br.readLine();
+                System.out.print("Input name of csv with filePath: ");
+                file = br.readLine();
+                start = System.nanoTime();
+                ds.heapDeleteKey(tmp,file);
+                stop = System.nanoTime();
+                displayTime(start,stop);
+                break;
             case 7:
                 System.out.print("Input a name: ");
                 tmp = br.readLine();
@@ -240,4 +260,5 @@ public class App {
     static void displayTime(long str, long stp) {
         System.out.println("Time takem:"+(double)((stp-str)/1000000)+"ms");
     }
+
 }

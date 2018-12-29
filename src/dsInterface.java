@@ -135,6 +135,30 @@ public class dsInterface {
         }
     }
 
+    void heapDeleteKey(String name,int key) {
+        if(!heapInstances.containsKey(name)) {
+            System.out.println("Failed to get the min heap");
+        } else {
+            ((minHeap)heapInstances.get(name)).delete(key,Boolean.TRUE);
+        }
+    }
+
+    void heapDeleteKey(String name,String filePath) {
+        if(!heapInstances.containsKey(name)) {
+            System.out.println("Failed to get the min heap");
+        } else {
+            try {
+                Scanner s = new Scanner(new FileReader(filePath)).useDelimiter(",");
+                while(s.hasNextInt()) {
+                    ((minHeap)heapInstances.get(name)).delete(s.nextInt(),Boolean.FALSE);
+                }
+                System.out.println("Deleted keys using "+filePath);
+            } catch (IOException e) {
+                System.out.println("Failed to read "+filePath);
+            }
+        }
+    }
+
     void heapDeleteMin(String name) {
         if(!heapInstances.containsKey(name)) {
             System.out.println("Failed to get the min heap");
