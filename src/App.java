@@ -28,7 +28,7 @@ public class App {
                     avlMenu();
                     break;
                 case 2:
-                    System.out.println();
+                    minHeapMenu();
                     break;
                 case 3:
                     System.out.print("Input file name with path:");
@@ -134,7 +134,76 @@ public class App {
                 System.out.print("Input a name: ");
                 tmp = br.readLine();
                 start = System.nanoTime();
-                ds.avlShowTree(tmp);
+                ds.avlShow(tmp);
+                stop = System.nanoTime();
+                displayTime(start,stop);
+                break;
+            default:
+                System.out.println("Invalid options");
+                break;
+        }
+    }
+
+    static void minHeapMenu()throws Exception {
+        String tmp, file;
+        int x;
+        System.out.println("\nSelect a Min Heap operation");
+        System.out.println("0. Go Back");
+        System.out.println("1. Create");
+        System.out.println("2. Destroy");
+        System.out.println("3. Insert key");
+        System.out.println("4. Insert keys from file");
+        //System.out.println("5. Delete key");
+        //System.out.println("6. Delete keys from file");
+        //System.out.println("7. Delete min");
+        //System.out.println("8. Find key");
+        //System.out.println("9. Find min");
+        System.out.println("10. Show tree");
+        System.out.print("Input: ");
+        switch (Integer.parseInt(br.readLine())) {
+            case 0:
+                break;
+            case 1:
+                System.out.print("Input a name: ");
+                tmp = br.readLine();
+                start = System.nanoTime();
+                ds.heapCreate(tmp);
+                stop = System.nanoTime();
+                displayTime(start,stop);
+                break;
+            case 2:
+                System.out.print("Input a name: ");
+                tmp = br.readLine();
+                start = System.nanoTime();
+                ds.heapDestroy(tmp);
+                stop = System.nanoTime();
+                displayTime(start,stop);
+                break;
+            case 3:
+                System.out.print("Input a name: ");
+                tmp = br.readLine();
+                System.out.print("Input a key: ");
+                x = Integer.parseInt(br.readLine());
+                start = System.nanoTime();
+                ds.heapInsertKey(tmp,x);
+                stop = System.nanoTime();
+                displayTime(start,stop);
+                break;
+            case 4:
+                System.out.print("Input a name: ");
+                tmp = br.readLine();
+                System.out.print("Input name of csv with filePath: ");
+                file = br.readLine();
+                start = System.nanoTime();
+                ds.heapInsertKey(tmp,file);
+                stop = System.nanoTime();
+                displayTime(start,stop);
+                break;
+            case 10:
+                System.out.print("Input a name: ");
+                tmp = br.readLine();
+                start = System.nanoTime();
+                ds.heapShow(tmp);
                 stop = System.nanoTime();
                 displayTime(start,stop);
                 break;

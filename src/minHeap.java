@@ -3,7 +3,6 @@ import java.util.List;
 
 public class minHeap {
     List<Integer> heap;
-    int size=-1;
 
     minHeap() {
         heap = new ArrayList<>();
@@ -14,18 +13,58 @@ public class minHeap {
     }
 
     void insert(int key) {
-        heap.add(++size,key);
-        if(key>heap.get(parent(key)))
-            heapifyDown(0);
+        heap.add(key);
+        heapifyUp(heap.size()-1);
+    }
+
+    void display() {
+        System.out.println("Preorder: ");
+        preorder(0);
+        System.out.println("\nInorder: ");
+        inorder(0);
+        System.out.println("\nPostorder: ");
+        postorder(0);
+        System.out.print("\n");
+    }
+
+    private void preorder(int t) {
+        if(t<heap.size() && t>=0) {
+            System.out.print(heap.get(t)+" ");
+            preorder(left(t));
+            preorder(right(t));
+        }
+    }
+
+    private void inorder(int t) {
+        if(t<heap.size() && t>=0) {
+            inorder(left(t));
+            System.out.print(heap.get(t)+" ");
+            inorder(right(t));
+        }
+    }
+
+    private void postorder(int t) {
+        if(t<heap.size() && t>=0) {
+            postorder(left(t));
+            postorder(right(t));
+            System.out.print(heap.get(t)+" ");
+        }
+    }
+
+    void heapifyUp(int node) {
+        if(node>0 && heap.get(parent(node))>heap.get(node)) {
+            swap(node,parent(node));
+            heapifyUp(parent(node));
+        }
     }
 
     void heapifyDown(int node) {
         int l = left(node);
         int r = right(node);
         int smallest = node;
-        if(l<size && heap.get(l)<heap.get(node))
+        if(l<heap.size() && heap.get(l)<heap.get(node))
             smallest = l;
-        if(r<size && heap.get(r)<heap.get(node))
+        if(r<heap.size() && heap.get(r)<heap.get(node))
             smallest = r;
         if(smallest != node) {
             swap(node, smallest);

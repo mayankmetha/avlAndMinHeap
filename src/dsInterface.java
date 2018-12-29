@@ -83,7 +83,7 @@ public class dsInterface {
         }
     }
 
-    void avlShowTree(String name) {
+    void avlShow(String name) {
         if(!avlInstances.containsKey(name)) {
             System.out.println("Failed to get the avl tree");
         } else {
@@ -111,6 +111,35 @@ public class dsInterface {
     }
 
     void heapInsertKey(String name, int key) {
+        if(!heapInstances.containsKey(name)) {
+            System.out.println("Failed to get the min heap");
+        } else {
+            ((minHeap)heapInstances.get(name)).insert(key);
+            System.out.println("Successfully inserted key to "+name);
+        }
+    }
 
+    void heapInsertKey(String name, String filePath) {
+        if(!heapInstances.containsKey(name)) {
+            System.out.println("Failed to get the min heap");
+        } else {
+            try {
+                Scanner s = new Scanner(new FileReader(filePath)).useDelimiter(",");
+                while(s.hasNextInt()) {
+                    ((minHeap)heapInstances.get(name)).insert(s.nextInt());
+                }
+                System.out.println("Inserted keys from "+filePath);
+            } catch (IOException e) {
+                System.out.println("Failed to read "+filePath);
+            }
+        }
+    }
+
+    void heapShow(String name) {
+        if(!heapInstances.containsKey(name)) {
+            System.out.println("Failed to get the avl tree");
+        } else {
+            ((minHeap)heapInstances.get(name)).display();
+        }
     }
 }
