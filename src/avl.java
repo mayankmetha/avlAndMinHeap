@@ -10,15 +10,16 @@ public class avl {
         root = null;
     }
 
-    void insert(int key) {
-       root = insert(key,root);
+    void insert(int key,Boolean status) {
+       root = insert(key,root,status);
     }
 
-    private avlNode insert(int key, avlNode t) {
+    private avlNode insert(int key, avlNode t,Boolean status) {
         if(t == null) {
             t = new avlNode(key);
+            if(status) System.out.println(key+" added successfully");
         } else if(key < t.key) {
-            t.left = insert(key,t.left);
+            t.left = insert(key,t.left,status);
             if(height(t.left)-height(t.right) == 2) {
                 if(key<t.left.key) {
                     t = LL(t);
@@ -27,7 +28,7 @@ public class avl {
                 }
             }
         } else if(key>t.key) {
-            t.right = insert(key,t.right);
+            t.right = insert(key,t.right,status);
             if(height(t.right)-height(t.left) == 2) {
                 if(key>t.right.key) {
                     t = RR(t);
@@ -36,26 +37,28 @@ public class avl {
                 }
             }
         } else {
-            // Duplicate node not allowed
+            if(status) System.out.println("Cannot allow duplicate "+key);
         }
         t.height = Math.max(height(t.left),height(t.right))+1;
         return balance(t);
     }
 
-    void delete(int key) {
-        root = delete(key,root);
+    void delete(int key,Boolean status) {
+        root = delete(key,root,status);
+        if(status) System.out.println(key+" deleted successfully!");
     }
 
-    private avlNode delete(int key, avlNode t) {
+    private avlNode delete(int key, avlNode t, Boolean status) {
         if (t == null) {
+            if(status) System.out.println(key+" was not found!");
             return null;
         } else if (key < t.key) {
-            t.left = delete(key, t.left);
+            t.left = delete(key, t.left,status);
         } else if (key > t.key) {
-            t.right = delete(key, t.right);
+            t.right = delete(key, t.right,status);
         } else if (t.left != null && t.right != null) {
             t.key = findMin(t.right).key;
-            t.right = delete(t.key,t.right);
+            t.right = delete(t.key,t.right,status);
         } else {
             t = (t.left != null)?t.left:t.right;
         }

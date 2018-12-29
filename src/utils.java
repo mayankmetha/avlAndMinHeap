@@ -7,7 +7,7 @@ public class utils {
     private Random rand = new Random(System.currentTimeMillis());
 
     int nextRandom() {
-        return rand.nextInt();
+        return Math.abs(rand.nextInt()%100000);
     }
 
     String createFile(String filePath, long keys) {
@@ -24,13 +24,5 @@ public class utils {
         } catch (IOException e) {
             return ("Creating file in "+filePath+" failed");
         }
-    }
-
-    int keyboardInput() {
-        System.out.print("Input a key: ");
-        Scanner s = new Scanner(System.in);
-        if(s.hasNextInt())
-            return s.nextInt();
-        else return Integer.MIN_VALUE;
     }
 }
