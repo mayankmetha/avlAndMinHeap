@@ -155,9 +155,9 @@ public class App {
         System.out.println("4. Insert keys from file");
         //System.out.println("5. Delete key");
         //System.out.println("6. Delete keys from file");
-        //System.out.println("7. Delete min");
-        //System.out.println("8. Find key");
-        //System.out.println("9. Find min");
+        System.out.println("7. Delete min");
+        System.out.println("8. Find key");
+        System.out.println("9. Find min");
         System.out.println("10. Show tree");
         System.out.print("Input: ");
         switch (Integer.parseInt(br.readLine())) {
@@ -199,6 +199,30 @@ public class App {
                 stop = System.nanoTime();
                 displayTime(start,stop);
                 break;
+            case 7:
+                System.out.print("Input a name: ");
+                tmp = br.readLine();
+                start = System.nanoTime();
+                ds.heapDeleteMin(tmp);
+                stop = System.nanoTime();
+                displayTime(start,stop);
+                break;
+            case 8:
+                System.out.print("Input a name: ");
+                tmp = br.readLine();
+                System.out.print("Input a key: ");
+                x = Integer.parseInt(br.readLine());
+                start = System.nanoTime();
+                ds.heapFind(tmp,x);
+                stop = System.nanoTime();
+                displayTime(start,stop);
+            case 9:
+                System.out.print("Input a name: ");
+                tmp = br.readLine();
+                start = System.nanoTime();
+                ds.heapFindMin(tmp);
+                stop = System.nanoTime();
+                displayTime(start,stop);
             case 10:
                 System.out.print("Input a name: ");
                 tmp = br.readLine();
